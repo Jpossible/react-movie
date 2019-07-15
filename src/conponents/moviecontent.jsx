@@ -1,5 +1,7 @@
 import React from 'react'
-import { Card, Spin, Alert } from 'antd';
+import { Card, Spin, Alert } from 'antd'
+// import fetchJSONP from 'fetch-jsonp'
+import MovieItem from './movieItem'
 import './moviecontent.css'
 
 const { Meta } = Card;
@@ -14,9 +16,7 @@ export default class MovieContent extends React.Component {
     }
     componentWillMount() {
         fetch('http://127.0.0.1:3000/pros/list') //当使用ES6 fetch API获取接口数据时第一个回调中获取不到服务器返回的数据
-            .then(res=>{
-            return res.json() //需要对第一个返回的响应值调用json转换为promise对象并再次return
-            })
+            .then(res=> res.json()) //需要对第一个返回的响应值调用json转换为promise对象并再次return
             .then(res=>{
                 console.log(res.result.list)
                 this.setState({
@@ -24,20 +24,23 @@ export default class MovieContent extends React.Component {
                     isloading:false
                 })
             })
+        // 服务器端若只支持JSONP跨域则使用fetchJSONP包，用法于原生ES6 fetch API相同 本测试使用跨域请求头 故注释
+        // fetchJSONP('http://127.0.0.1:3000/pros/list')
+        //     .then(res=> res.json())
+        //     .then(res=>{
+        //         console.log(res.result.list)
+        //         this.setState({
+        //             prolist:res.result.list,
+        //             isloading:false
+        //         })
+        //     })
     }
 
     render() {
         return (
             <div className="moviecontent">
                 {this.renderlist()}
-                {this.state.prolist.map((item,i)=><Card
-                    key={i}
-                    hoverable
-                    style={{ width: 240 }}
-                    cover={<img alt={item.proName} src="/static/images/5a7cf97fe6bde_1024.jpg" />}
-                >
-                    <Meta title={item.salePrice} description={item.proName} />
-                </Card>)}
+                {this.state.prolist.map((item,i) => <MovieItem {...item} key={i} />)}
             </div>
         )
     }

@@ -1,0 +1,18 @@
+.itembox {
+    width: 240px;
+    height: 300px;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #dadada;
+    background: #fff;
+}
+.itembox .itembox_imgbox{
+    height: 200px;
+    text-align: center;
+}
+.itembox .itembox_imgbox img{
+    height: 200px;
+}
+.itembox_textbox p {
+    line-height: 20px;
+}
