@@ -5,14 +5,21 @@
     margin-top: 10px;
     border: 1px solid #dadada;
     background: #fff;
+    cursor: pointer;
+    transition: 100ms ease all;
+    .itembox_imgbox{
+        height: 200px;
+        text-align: center;
+    }
+    .itembox_imgbox img{
+        height: 200px;
+    }
+    .itembox_textbox p {
+        line-height: 20px;
+    }
+    &:hover {
+        opacity: 0.9;
+        transform: scale(1.05);
+    }
 }
-.itembox .itembox_imgbox{
-    height: 200px;
-    text-align: center;
-}
-.itembox .itembox_imgbox img{
-    height: 200px;
-}
-.itembox_textbox p {
-    line-height: 20px;
-}
+

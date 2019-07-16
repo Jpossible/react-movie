@@ -1,7 +1,8 @@
 import React from 'react'
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link ,Switch } from 'react-router-dom';
 import MovieContent from './moviecontent'
+import MovieDetial from './movieDetail'
 
 const { Item } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -13,16 +14,19 @@ export default class Movie extends React.Component {
             <Sider width={200} style={{ background: '#fff' }}>
                 <Menu
                     mode="inline"
-                    defaultSelectedKeys={['1']}
+                    defaultSelectedKeys={[window.location.hash.split('/')[2]]}
                     style={{ height: '100%', borderRight: 0 }}
                 >
-                    <Item key="1"><Link to="/Movie/top/1">Top</Link></Item>
-                    <Item key="2"><Link to="/Movie/comingsoon/1">Comingsoon</Link></Item>
-                    <Item key="3"><Link to="/Movie/vip/1">Vip</Link></Item>
+                    <Item key="All"><Link to="/Movie/All/1">All</Link></Item>
+                    <Item key="Hundreds"><Link to="/Movie/Hundreds/1">200.00-1000.00</Link></Item>
+                    <Item key="Thousand"><Link to="/Movie/Thousand/1">1000.00-3000.00</Link></Item>
                 </Menu>
             </Sider>
             <Content style={{ padding: '0 24px', minHeight: 280 }}>
-                <Route path="/Movie/:type/:page" component={MovieContent}></Route>
+                <Switch>
+                    <Route path="/Movie/Detail/:id" component={MovieDetial}></Route>
+                    <Route path="/Movie/:type/:page" component={MovieContent}></Route>
+                </Switch>
             </Content>
         </Layout>)
     }
